@@ -1,0 +1,28 @@
+{
+  "cleanupPeriodDays": 14,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "mcp__browser-tools__takeScreenshot"
+    ],
+    "defaultMode": "acceptEdits"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/format-and-lint.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {},
+  "outputStyle": "default"
+}

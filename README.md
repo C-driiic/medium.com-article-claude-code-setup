@@ -1,10 +1,10 @@
 # Claude Code Setup — Article Companion Files
 
-This repository contains the configuration files referenced in the article **[How I Set Up Claude Code for a Complex Project](https://cedv.medium.com/how-i-set-up-claude-code-for-a-complex-project-ae1beb2e6a37)**, published on [Medium](https://medium.com/@cedric.vanier).
+This repository contains the configuration files referenced in the article **[How I Set Up Claude Code for a Complex Project]([ARTICLE_URL])**, published on [Medium](https://medium.com/@cedric.vanier).
 
 ## What is in here
 
-- `CLAUDE_EXAMPLE.MD` — the `CLAUDE.md` file placed at the project root
+- `CLAUDE.md` file placed at the project root
 - `claude/agents/` — nine specialist agent definitions (orchestrator, backend, frontend, UI designer, cloud architect, code reviewer, test specialist, docs specialist, git specialist)
 - `claude/commands/` — four custom slash commands (`/starter`, `/implement`, `/commit`, `/restart-servers`)
 - `claude/hooks/format-and-lint.sh` — a post-edit hook that runs Prettier and ESLint automatically
