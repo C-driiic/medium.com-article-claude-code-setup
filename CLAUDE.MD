@@ -121,3 +121,53 @@ Located in `.claude/agents/`:
 - **Architecture**: `/docs/architecture.md`
 - **Database**: `/docs/database.md`
 - **Changelogs**: `/docs/changelogs/`
+
+## Worktrees
+
+When a task is assigned to a worktree, **ALL file edits MUST target the worktree path**:
+
+```
+.claude/worktrees/<worktree-name>/
+```
+
+**NEVER edit files in the root working directory when a worktree is active for that task.**
+
+This applies to every agent — backend-specialist, frontend-specialist, docs-specialist, test-specialist, etc. If a specialist receives a task with a worktree path, every Read, Edit, Write, and Bash file operation must use that path as the base.
+
+The docs-specialist must also write changelogs and documentation updates inside the worktree, not on main.
+
+## Database Inspection
+
+When Claude needs to inspect database data:
+
+**DO NOT** try to create temporary files or use inline tsx eval.
+
+**DO** use one of the existing scripts from the scripts/ folder or create a new one following the below pattern:
+
+**Pattern for new scripts:**
+
+- Place in `scripts/` folder
+- Import from `"../server/utils/prisma"`
+- Import from `"dotenv/config"`
+- Use async function with proper error handling
+- Run with `tsx --env-file-if-exists=.env.local scripts/filename.ts <optional_args>`
+
+Note: All npm scripts (`npm run db:*`, `npm run seed:*`) already include the `--env-file-if-exists=.env.local` flag automatically.
+
+## Database Migrations
+
+**NEVER** use `prisma db push`. It bypasses migration tracking, creates broken `applied_steps_count = 0` records in `_prisma_migrations`, breaks the shadow DB replay chain, and makes the DB state unreproducible on a fresh instance.
+
+**Schema changes:** Always create a migration file:
+
+```sh
+npm run db:migrate -- --name <description>
+```
+
+**CI/CD and fresh environments:** Use `prisma migrate deploy` (not `db push`):
+
+```sh
+npm run db:deploy
+```
+
+**If `migrate dev` fails** due to shadow DB issues, investigate and fix the migration history. Do NOT use `db push` as a workaround.

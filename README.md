@@ -5,8 +5,8 @@ This repository contains the configuration files referenced in the article **[Ho
 ## What is in here
 
 - `CLAUDE.md` file placed at the project root
-- `claude/agents/` — nine specialist agent definitions (orchestrator, backend, frontend, UI designer, cloud architect, code reviewer, test specialist, docs specialist, git specialist)
-- `claude/commands/` — four custom slash commands (`/starter`, `/implement`, `/commit`, `/restart-servers`)
+- `claude/agents/` — specialist agent definitions (orchestrator, backend, frontend, UI designer, cloud architect, code reviewer, test specialist, docs specialist, git specialist, ...)
+- `claude/commands/` — custom slash commands (`/starter`, `/implement`, `/commit`, `/restart-servers`, `/start-worktree`, ...)
 - `claude/hooks/format-and-lint.sh` — a post-edit hook that runs Prettier and ESLint automatically
 - `claude/settings.local.json` — local Claude Code settings with hook configuration
 
