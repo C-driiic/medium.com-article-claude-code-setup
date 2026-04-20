@@ -112,6 +112,13 @@ element.textContent = userInput
 | **Medium**   | Style violations, missing states, naming issues        |
 | **Low**      | Verbose code, minor improvements                       |
 
+## Code Navigation
+
+- Always use LSP `goToDefinition` before modifying any function
+- Always use LSP `findReferences` before renaming or refactoring
+- Use LSP for all TypeScript/JavaScript navigation (`.ts`, `.tsx`, `.js`, `.jsx`)
+- Fall back to Grep only when LSP returns no results
+
 ## Checklist
 
 - [ ] Auto-fix ran (`npm run fix`)

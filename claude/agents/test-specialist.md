@@ -282,6 +282,13 @@ vi.useFakeTimers()
 // ✗ Don't mock too much — if everything is mocked, test is worthless
 ```
 
+## Code Navigation
+
+- Always use LSP `goToDefinition` before modifying any function
+- Always use LSP `findReferences` before renaming or refactoring
+- Use LSP for all TypeScript/JavaScript navigation (`.ts`, `.tsx`, `.js`, `.jsx`)
+- Fall back to Grep only when LSP returns no results
+
 ## Output Format
 
 Return:
