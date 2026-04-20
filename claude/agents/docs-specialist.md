@@ -60,9 +60,11 @@ CLAUDE.md provides project context that Claude reads automatically. Keep it conc
 
 ### When to Generate
 
-- After large feature implementations
-- Before releases
-- On request
+- When invoked by the git-specialist at commit time
+- Before releases (on main, not inside a worktree)
+- On explicit request
+
+**NEVER write a changelog inside a worktree.** The git-specialist spawns the docs-specialist to write the changelog at commit time, after the branch has been updated to the latest main. Writing changelogs during worktree development causes merge conflicts when multiple worktrees are active on the same day.
 
 ### Changelog Format
 

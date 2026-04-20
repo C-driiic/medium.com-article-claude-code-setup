@@ -92,6 +92,7 @@ Use lowercase, hyphens as separators.
 ### Before Proposing Commit
 
 ```bash
+git worktree list
 git status
 git diff --staged
 ```

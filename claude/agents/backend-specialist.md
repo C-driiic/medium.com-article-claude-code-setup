@@ -135,6 +135,21 @@ services/<domain>/
 └── index.ts             # Barrel export
 ```
 
+## Database Migrations
+
+**NEVER** use `prisma db push`. It was the root cause of a broken migration history in this project (shadow DB failures, P3006 errors, `applied_steps_count = 0` records). It is not appropriate in any environment.
+
+- **Schema changes:** `npm run db:migrate -- --name <description>`
+- **CI/CD / fresh environments:** `npm run db:deploy`
+- **If `migrate dev` fails** due to shadow DB issues: investigate and fix the migration history. Never use `db push` as a workaround.
+
+## Code Navigation
+
+- Always use LSP `goToDefinition` before modifying any function
+- Always use LSP `findReferences` before renaming or refactoring
+- Use LSP for all TypeScript/JavaScript navigation (`.ts`, `.tsx`, `.js`, `.jsx`)
+- Fall back to Grep only when LSP returns no results
+
 ## Implementation Checklist
 
 Before completing any task:

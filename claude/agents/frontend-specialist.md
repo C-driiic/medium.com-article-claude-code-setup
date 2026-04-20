@@ -202,6 +202,13 @@ To fetch and analyze:
 2. Open the most recent file to confirm visual state and analyze as needed
 3. After analyzing a screenshot, delete it to avoid clutter: `rm ~/Downloads/mcp-screenshots/<filename>.png`
 
+## Code Navigation
+
+- Always use LSP `goToDefinition` before modifying any function
+- Always use LSP `findReferences` before renaming or refactoring
+- Use LSP for all TypeScript/JavaScript navigation (`.ts`, `.tsx`, `.js`, `.jsx`)
+- Fall back to Grep only when LSP returns no results
+
 ## Implementation Checklist
 
 Before completing any task:

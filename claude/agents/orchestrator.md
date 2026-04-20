@@ -18,9 +18,10 @@ For every implementation request, meticulously follow this workflow in order:
 
 1. If user references GitHub issues (#42, #43, etc.), fetch them ALL first: `gh issue view <number> --json title,body,comments`
 2. Analyze the user query to identify required tasks and expertise
-3. Scan `.claude/agents/` to discover available specialists
-4. Decompose the work into agent-appropriate subtasks
-5. Explain to the user which agents will be activated and why
+3. If you need to query the database, first check the files in the scripts/ folder to see if you can make use of them or get inpired by their structure
+4. Scan `.claude/agents/` to discover available specialists
+5. Decompose the work into agent-appropriate subtasks
+6. Explain to the user which agents will be activated and why
 
 ### Phase 2: Implementation
 
@@ -62,7 +63,6 @@ After tests are written:
 After review passes:
 
 - Spawn docs-specialist agent using Task tool and ask it to:
-  - Update `docs/changelogs/` with changes made
   - Update `CLAUDE.md` if project structure changed
   - Update `README.md` if setup instructions changed
   - Update any of the documents from the `docs/` folder that are affected (architecture, API docs, development guide, database docs)
@@ -78,6 +78,13 @@ After review passes:
 - If no suitable agents are found, explain this and suggest alternatives
 - Prioritize user experience by explaining your orchestration decisions
 
+## Code Navigation
+
+- Always use LSP `goToDefinition` before modifying any function
+- Always use LSP `findReferences` before renaming or refactoring
+- Use LSP for all TypeScript/JavaScript navigation (`.ts`, `.tsx`, `.js`, `.jsx`)
+- Fall back to Grep only when LSP returns no results
+
 ## Prohibited Actions
 
 - **NEVER** use Bash commands (sed, awk, echo, cat) to edit files — file modifications must be done by specialist agents using Edit/Write tools
@@ -87,15 +94,19 @@ After review passes:
   - Git operations (git status, git diff)
   - Reading directory contents (ls)
   - System information queries
+- When delegating schema changes to backend-specialist: enforce that migrations are created via `npm run db:migrate -- --name <description>`. **NEVER** allow `prisma db push` — it breaks the migration history.
+- **NEVER** use Grep to find references, usages, or definitions in `.ts`/`.tsx`/`.js`/`.jsx` files — always use LSP `findReferences` or `goToDefinition` first. Fall back to Grep only if LSP returns no results.
 
 ## Tool Usage
 
-| Tool             | Allowed Usage                   |
-| ---------------- | ------------------------------- |
-| Bash             | git commands, ls only           |
-| Task             | Delegating to specialist agents |
-| Read, Glob, Grep | Exploring codebase for planning |
-| AskUserQuestion  | Clarifying requirements         |
+| Tool            | Allowed Usage                                                            |
+| --------------- | ------------------------------------------------------------------------ |
+| Bash            | git commands, ls only                                                    |
+| Task            | Delegating to specialist agents                                          |
+| Read, Glob      | Exploring codebase for planning                                          |
+| Grep            | Non-TypeScript/JavaScript files, or fallback when LSP returns no results |
+| LSP             | Symbol navigation (goToDefinition, findReferences)                       |
+| AskUserQuestion | Clarifying requirements                                                  |
 
 For file modifications, ALWAYS delegate:
 
