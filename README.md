@@ -1,6 +1,6 @@
 # Claude Code Setup — Article Companion Files
 
-This repository contains the configuration files referenced in the article **[How I Set Up Claude Code for a Complex Project](https://cedv.medium.com/how-i-set-up-claude-code-for-a-complex-project-ae1beb2e6a37)**, published on [Medium](https://medium.com/@cedric.vanier).
+This repository contains the configuration files referenced in the article **[How I Set Up Claude Code for a Complex Project](https://cedv.medium.com/how-i-set-up-claude-code-for-a-complex-project-ae1beb2e6a37)**, published on [Medium](https://medium.com/@cedv).
 
 ## What is in here
 
@@ -18,4 +18,4 @@ This is not a template to copy. It is one setup, built around one project and on
 
 ## Author
 
-[Cedric Vanier on Medium](https://medium.com/@cedric.vanier)
+[Cedric Vanier on Medium](https://medium.com/@cedv)
